@@ -1,0 +1,16 @@
+node_modules
+.editorconfig
+.eslintrc.js
+.prettierrc
+.browserslistrc
+
+build
+public
+
+*.config.js
+tsconfig.json
+
+# jest
+jest.config.js
+test
+coverage

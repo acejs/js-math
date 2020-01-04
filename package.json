@@ -1,0 +1,39 @@
+{
+  "name": "JsMath",
+  "version": "0.0.1",
+  "description": "A simple math calculation library for JavaScript and Node.js",
+  "main": "dist/index.js",
+  "repository": "https://github.com/BlueBlueBlueSky/js-math.git",
+  "author": "<15380598700@163.com>",
+  "license": "MIT",
+  "keywords": [
+    "Javascipt",
+    "library",
+    "math",
+    "precision"
+  ],
+  "scripts": {
+    "serve": "webpack-dev-server --mode=development --config ./build/webpack.config.js",
+    "build": "webpack --mode=production --config ./build/webpack.config.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.24",
+    "@types/source-map": "^0.5.7",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^6.8.0",
+    "fork-ts-checker-webpack-plugin": "^3.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  }
+}
