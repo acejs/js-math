@@ -1,6 +1,8 @@
 node_modules
+src
+yarn-error.log
 .editorconfig
-.eslintrc.js
+.eslintrc.json
 .prettierrc
 .browserslistrc
 
@@ -14,3 +16,4 @@ tsconfig.json
 jest.config.js
 test
 coverage
+

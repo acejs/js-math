@@ -6,7 +6,7 @@ module.exports = {
   output: {
     // 默认/dist
     filename: 'index.js',
-    library: 'JsUtils',
+    library: 'jsMath',
     libraryTarget: 'umd',
     globalObject: 'this'
   },
