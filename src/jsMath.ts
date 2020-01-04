@@ -1,12 +1,14 @@
-import { isUndefined } from './libs/basic'
+interface isTrue {
+  (x: any): boolean
+}
 
-type ACTION = '_multiply' | '_add' | '_devide' | '_subtract'
+const isUndefined: isTrue = u => u === void 0
 
 class JSMath {
   private result: number = NaN
   private isChain: boolean = false
   private precision: number = 12
-  private needCheck: boolean = true
+  private needCheck: boolean = false
 
   /**
    * 重置精度
@@ -54,7 +56,7 @@ class JSMath {
    * 计算浮点数小数位数
    * @param float 浮点数
    */
-  digitDecimalLength(float: number): number {
+  private digitDecimalLength(float: number): number {
     const eSplit: string[] = String(float).split(/[eE]/) // 兼容科学计数法
     const len: number =
       (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0)
@@ -65,7 +67,7 @@ class JSMath {
    * 将小数转化成整数
    * @param float 浮点数
    */
-  floatToInteger(float: number): number {
+  private floatToInteger(float: number): number {
     if (!String(float).includes('e')) {
       return Number(String(float).replace('.', ''))
     }
@@ -99,18 +101,11 @@ class JSMath {
    * @param rest 参数数组
    * @param fn 具体方法
    */
-  private _handle(rest: number[], fn: ACTION) {
+  private _handle(rest: number[], fn: Function) {
     if (this.isChain) rest.unshift(this.result)
-    const res = this[fn](rest[0], rest[1], ...rest.slice(2))
 
-    // 使用类型保护
-    // 类型谓词 arg is type
-    // if (isThis(this.isChain)) {
-    //   this.result = res
-    //   return this
-    // } else {
-    //   return res
-    // }
+    const res = fn.call(this, rest[0], rest[1], ...rest.slice(2))
+
     if (this.isChain) {
       this.result = res
       return this
@@ -145,7 +140,7 @@ class JSMath {
    * @param rest 参数
    */
   multiply(...rest: number[]) {
-    return this._handle(rest, '_multiply')
+    return this._handle(rest, this._multiply)
   }
 
   /**
@@ -171,7 +166,7 @@ class JSMath {
    * @param rest 参数
    */
   add(...rest: number[]) {
-    return this._handle(rest, '_add')
+    return this._handle(rest, this._add)
   }
 
   /**
@@ -182,7 +177,7 @@ class JSMath {
    */
   private _subtract(n1: number, n2: number, ...rest: number[]): number {
     if (rest.length > 0) {
-      return this._subtract(this._subtract(n1, n2), rest[0], rest[1])
+      return this._subtract(this._subtract(n1, n2), rest[0], ...rest.slice(1))
     }
 
     // 获取较大位数的小数个数
@@ -197,7 +192,7 @@ class JSMath {
    * @param rest 数字数组
    */
   subtract(...rest: number[]) {
-    return this._handle(rest, '_subtract')
+    return this._handle(rest, this._subtract)
   }
 
   /**
@@ -226,7 +221,7 @@ class JSMath {
    * @param rest 数字数组
    */
   devide(...rest: number[]) {
-    return this._handle(rest, '_devide')
+    return this._handle(rest, this._devide)
   }
 
   /**
@@ -238,23 +233,16 @@ class JSMath {
     const base: number = 10 ** ratio
 
     if (this.isChain) {
-      this.result = Math.round((this.multiply(base) as JSMath).result)
+      this.result = Math.round(this.multiply(base).result)
       return this.devide(base)
     } else {
       if (isUndefined(float)) {
-        console.warn('round function should has two arguments bug got one')
+        console.warn('round function should has two arguments but got one')
       } else {
-        return this.devide(
-          Math.round(this._multiply(base, float as number)),
-          base
-        )
+        return this.devide(Math.round(this._multiply(base, float!)), base)
       }
     }
   }
 }
 
-function isThis(chain: boolean): chain is true {
-  return chain
-}
-
-export default new JSMath()
+export default JSMath
