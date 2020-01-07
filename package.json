@@ -1,5 +1,5 @@
 {
-  "name": "js-Math",
+  "name": "@cdjs/js-math",
   "version": "0.0.1",
   "description": "A simple math calculation library for JavaScript and Node.js",
   "main": "dist/index.js",
@@ -8,9 +8,11 @@
   "license": "MIT",
   "keywords": [
     "Javascipt",
+    "Typescript",
     "library",
     "math",
-    "precision"
+    "precision",
+    "calc"
   ],
   "scripts": {
     "serve": "webpack-dev-server --mode=development --config ./build/webpack.config.js",

@@ -5,6 +5,7 @@ yarn-error.log
 .eslintrc.json
 .prettierrc
 .browserslistrc
+publish.sh
 
 build
 public
