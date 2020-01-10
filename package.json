@@ -1,6 +1,6 @@
 {
   "name": "@cdjs/js-math",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple math calculation library for JavaScript and Node.js",
   "main": "dist/index.js",
   "repository": "https://github.com/BlueBlueBlueSky/js-math.git",
