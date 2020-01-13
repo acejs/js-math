@@ -4,6 +4,7 @@
   "description": "A simple math calculation library for JavaScript and Node.js",
   "main": "dist/bundle.js",
   "module": "dist/bundle.esm.js",
+  "types": "types/index.d.ts",
   "repository": "https://github.com/BlueBlueBlueSky/js-math.git",
   "author": "<15380598700@163.com>",
   "license": "MIT",
@@ -19,7 +20,6 @@
     "precision",
     "calc"
   ],
-  "types": "types/index.d.ts",
   "devDependencies": {
     "@rollup/plugin-typescript": "^2.1.0",
     "@types/jest": "^24.0.24",
