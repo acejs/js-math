@@ -38,7 +38,7 @@ declare class JSMath {
      * 设置链式调用
      * @param init 初始值 默认 0
      */
-    chain(init?: number): this;
+    chain(init?: number): JSMath;
     /**
      * 结束链式调用并返回最终值
      */
@@ -60,7 +60,7 @@ declare class JSMath {
      * 乘
      * @param rest 参数
      */
-    multiply(...rest: number[]): any;
+    multiply(...rest: number[]): number | JSMath;
     /**
      * 实现加的链式调用
      * @param n1 数字1
@@ -72,7 +72,7 @@ declare class JSMath {
      * 加
      * @param rest 参数
      */
-    add(...rest: number[]): any;
+    add(...rest: number[]): number | JSMath;
     /**
      * 实现减的链式调用
      * @param n1 数字1
@@ -84,7 +84,7 @@ declare class JSMath {
      * 减
      * @param rest 数字数组
      */
-    subtract(...rest: number[]): any;
+    subtract(...rest: number[]): number | JSMath;
     /**
      * 实现除的链式调用
      * @param n1 数字1
@@ -96,12 +96,12 @@ declare class JSMath {
      * 除
      * @param rest 数字数组
      */
-    devide(...rest: number[]): any;
+    devide(...rest: number[]): number | JSMath;
     /**
      * 四舍五入
      * @param ratio 四舍五入精度
      * @param float 需要精确的小数
      */
-    round(ratio?: number, float?: number): any;
+    round(ratio?: number, float?: number): JSMath | void | number;
 }
 export default JSMath;

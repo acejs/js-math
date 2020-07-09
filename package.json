@@ -1,6 +1,6 @@
 {
   "name": "@cdjs/js-math",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple math calculation library for JavaScript and Node.js",
   "main": "dist/bundle.js",
   "module": "dist/bundle.esm.js",
@@ -9,7 +9,7 @@
   "author": "<15380598700@163.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "tsc && rollup --config rollup.config.js",
     "test": "jest"
   },
   "keywords": [
@@ -26,6 +26,8 @@
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "rollup": "^1.29.0",

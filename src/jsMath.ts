@@ -1,14 +1,8 @@
-interface isTrue {
-  (x: any): boolean
-}
-
-const isUndefined: isTrue = u => u === void 0
-
 class JSMath {
-  private result: number = NaN
-  private isChain: boolean = false
-  private precision: number = 12
-  private needCheck: boolean = false
+  private result = NaN
+  private isChain = false
+  private precision = 12
+  private needCheck = false
 
   /**
    * 重置精度
@@ -48,7 +42,7 @@ class JSMath {
    * @param float 浮点数
    * @param precision 小数位数
    */
-  strip(float: number, precision: number = this.precision) {
+  strip(float: number, precision: number = this.precision): number {
     return Number.parseFloat(float.toPrecision(precision))
   }
 
@@ -80,7 +74,7 @@ class JSMath {
    * 设置链式调用
    * @param init 初始值 默认 0
    */
-  chain(init: number = 0) {
+  chain(init = 0): JSMath {
     this.result = init
     this.isChain = true
     return this
@@ -101,7 +95,7 @@ class JSMath {
    * @param rest 参数数组
    * @param fn 具体方法
    */
-  private _handle(rest: number[], fn: Function) {
+  private _handle(rest: number[], fn: Function): number | JSMath {
     if (this.isChain) rest.unshift(this.result)
 
     const res = fn.call(this, rest[0], rest[1], ...rest.slice(2))
@@ -139,7 +133,7 @@ class JSMath {
    * 乘
    * @param rest 参数
    */
-  multiply(...rest: number[]) {
+  multiply(...rest: number[]): number | JSMath {
     return this._handle(rest, this._multiply)
   }
 
@@ -165,7 +159,7 @@ class JSMath {
    * 加
    * @param rest 参数
    */
-  add(...rest: number[]) {
+  add(...rest: number[]): number | JSMath {
     return this._handle(rest, this._add)
   }
 
@@ -191,7 +185,7 @@ class JSMath {
    * 减
    * @param rest 数字数组
    */
-  subtract(...rest: number[]) {
+  subtract(...rest: number[]): number | JSMath {
     return this._handle(rest, this._subtract)
   }
 
@@ -220,7 +214,7 @@ class JSMath {
    * 除
    * @param rest 数字数组
    */
-  devide(...rest: number[]) {
+  devide(...rest: number[]): number | JSMath {
     return this._handle(rest, this._devide)
   }
 
@@ -229,17 +223,18 @@ class JSMath {
    * @param ratio 四舍五入精度
    * @param float 需要精确的小数
    */
-  round(ratio: number = 2, float?: number) {
+  round(ratio = 2, float?: number): JSMath | void | number {
     const base: number = 10 ** ratio
 
     if (this.isChain) {
-      this.result = Math.round(this.multiply(base).result)
+      const int = this.multiply(base) as JSMath
+      this.result = Math.round(int.result)
       return this.devide(base)
     } else {
-      if (isUndefined(float)) {
-        console.warn('round function should has two arguments but got one')
+      if (typeof float === 'number') {
+        return this.devide(Math.round(this._multiply(base, float)), base)
       } else {
-        return this.devide(Math.round(this._multiply(base, float!)), base)
+        console.warn('round function should has two arguments but got one')
       }
     }
   }
