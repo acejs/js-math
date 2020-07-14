@@ -1,6 +1,5 @@
 declare class JSMath {
     private result;
-    private isChain;
     private precision;
     private needCheck;
     /**
@@ -35,14 +34,14 @@ declare class JSMath {
      */
     private floatToInteger;
     /**
-     * 设置链式调用
-     * @param init 初始值 默认 0
+     * 给 result 赋初始值
+     * @param init 初始值
      */
-    chain(init?: number): JSMath;
+    init(init?: number): this;
     /**
      * 结束链式调用并返回最终值
      */
-    done(): number;
+    value(): number;
     /**
      * 链式调用统一的处理
      * @param rest 参数数组
@@ -60,7 +59,7 @@ declare class JSMath {
      * 乘
      * @param rest 参数
      */
-    multiply(...rest: number[]): number | JSMath;
+    multiply(...rest: number[]): this;
     /**
      * 实现加的链式调用
      * @param n1 数字1
@@ -72,7 +71,7 @@ declare class JSMath {
      * 加
      * @param rest 参数
      */
-    add(...rest: number[]): number | JSMath;
+    add(...rest: number[]): this;
     /**
      * 实现减的链式调用
      * @param n1 数字1
@@ -84,7 +83,7 @@ declare class JSMath {
      * 减
      * @param rest 数字数组
      */
-    subtract(...rest: number[]): number | JSMath;
+    subtract(...rest: number[]): this;
     /**
      * 实现除的链式调用
      * @param n1 数字1
@@ -96,12 +95,12 @@ declare class JSMath {
      * 除
      * @param rest 数字数组
      */
-    devide(...rest: number[]): number | JSMath;
+    devide(...rest: number[]): this;
     /**
      * 四舍五入
      * @param ratio 四舍五入精度
      * @param float 需要精确的小数
      */
-    round(ratio?: number, float?: number): JSMath | void | number;
+    round(ratio?: number): this;
 }
 export default JSMath;

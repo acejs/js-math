@@ -3,9 +3,11 @@ src
 yarn-error.log
 .editorconfig
 .eslintrc.json
+.eslintignore
 .prettierrc
 .browserslistrc
 publish.sh
+README.md
 
 build
 public

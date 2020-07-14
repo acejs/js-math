@@ -1,6 +1,5 @@
 class JSMath {
   private result = NaN
-  private isChain = false
   private precision = 12
   private needCheck = false
 
@@ -71,22 +70,20 @@ class JSMath {
   }
 
   /**
-   * 设置链式调用
-   * @param init 初始值 默认 0
+   * 给 result 赋初始值
+   * @param init 初始值
    */
-  chain(init = 0): JSMath {
+  init(init = 0): this {
     this.result = init
-    this.isChain = true
     return this
   }
 
   /**
    * 结束链式调用并返回最终值
    */
-  done(): number {
+  value(): number {
     const result = this.result
     this.result = NaN
-    this.isChain = false
     return result
   }
 
@@ -95,17 +92,16 @@ class JSMath {
    * @param rest 参数数组
    * @param fn 具体方法
    */
-  private _handle(rest: number[], fn: Function): number | JSMath {
-    if (this.isChain) rest.unshift(this.result)
+  private _handle(rest: number[], fn: Function): this {
+    // 只有当 result 不为 NaN 时，才将初始值代入计算
+    Object.is(this.result, NaN)
+      ? (this.result = rest[0])
+      : rest.unshift(this.result)
 
-    const res = fn.call(this, rest[0], rest[1], ...rest.slice(2))
+    rest.length >= 2 &&
+      (this.result = fn.call(this, rest[0], rest[1], ...rest.slice(2)))
 
-    if (this.isChain) {
-      this.result = res
-      return this
-    } else {
-      return res
-    }
+    return this
   }
 
   /**
@@ -133,7 +129,7 @@ class JSMath {
    * 乘
    * @param rest 参数
    */
-  multiply(...rest: number[]): number | JSMath {
+  multiply(...rest: number[]): this {
     return this._handle(rest, this._multiply)
   }
 
@@ -159,7 +155,7 @@ class JSMath {
    * 加
    * @param rest 参数
    */
-  add(...rest: number[]): number | JSMath {
+  add(...rest: number[]): this {
     return this._handle(rest, this._add)
   }
 
@@ -185,7 +181,7 @@ class JSMath {
    * 减
    * @param rest 数字数组
    */
-  subtract(...rest: number[]): number | JSMath {
+  subtract(...rest: number[]): this {
     return this._handle(rest, this._subtract)
   }
 
@@ -214,7 +210,7 @@ class JSMath {
    * 除
    * @param rest 数字数组
    */
-  devide(...rest: number[]): number | JSMath {
+  devide(...rest: number[]): this {
     return this._handle(rest, this._devide)
   }
 
@@ -223,20 +219,10 @@ class JSMath {
    * @param ratio 四舍五入精度
    * @param float 需要精确的小数
    */
-  round(ratio = 2, float?: number): JSMath | void | number {
+  round(ratio = 2): this {
     const base: number = 10 ** ratio
-
-    if (this.isChain) {
-      const int = this.multiply(base) as JSMath
-      this.result = Math.round(int.result)
-      return this.devide(base)
-    } else {
-      if (typeof float === 'number') {
-        return this.devide(Math.round(this._multiply(base, float)), base)
-      } else {
-        console.warn('round function should has two arguments but got one')
-      }
-    }
+    this.result = Math.round(this.multiply(base).result)
+    return this.devide(base)
   }
 }
 
