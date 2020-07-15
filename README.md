@@ -1,37 +1,57 @@
-## 构建 Webpack + TypeScript JS 库开发框架
+## js-math
 
-### Webpack 相关
+A lightweight Javascript math library.
 
-- webpack
-- webpack-cli
-- webpack-merge
-- webpack-dev-server: 启动开发环境，在 webpack.dev.config.js 中配置
-- html-webpack-plugin: 输入到页面，在 webpack.base.config.js 中配置
-- clean-webpack-plugin: 用于在下一次打包时清除之前打包的文件，3.0.0 注意导入方式和传参
+### Installing
 
-### TypeScript 相关
+```bash
+npm install @cdjs/js-math
+// or
+yarn add @cdjs/js-math
+```
 
-- typescript
-- ts-loader: 用于加载 ts 文件
-  - transpileOnly `true`失去类型检查 `false` 降低编译速度
-- fork-ts-checker-webpack-plugin: 在 `transpileOnly: true` 时配置，开启一个独立的进程进行类型检查 [Webpack 文档](https://webpack.docschina.org/guides/build-performance/)
+### Usage
 
-### Babel
+```javascript
+// es6 module
+import jsMath, { multiply, add, subtract, devide, round } from '@cdjs/js-math'
+// commonjs
+const { multiply, add, subtract, devide, round, default: jsMath } = require('@cdjs/js-math')
+```
 
-### 测试
+### Documentation
 
-`npx ts-jest config:init`: 生成 jest 配置文件
+| Method       | desc                                                     | args                                                   |
+| ------------ | -------------------------------------------------------- | ------------------------------------------------------ |
+| multiply     | 乘                                                       | ...Array                                               |
+| add          | 加                                                       | ...Array                                               |
+| subtract     | 减                                                       | ...Array                                               |
+| devide       | 除                                                       | ...Array                                               |
+| round        | 四舍五入                                                 | ratio: Number 精度<br />number?: Number 需要处理的数字 |
+| value        | 获取最终值                                               | /                                                      |
+| setPrecision | 设置浮点数最大保留精度，默认 12 位                       | number: Number                                         |
+| enableCheck  | 是否开启对运算结果是否超出 js 安全数值的提醒，默认 false | check: Boolean                                         |
 
-- `jest`
-- `@types/jest`
-- `ts-jest`: 测试用例中可以进行类型检查
+### How to use
 
-`jest.config.js`中新增`preset: 'ts-jest', testEnvironment: 'node'`
+#####Simple use
 
-### eslint
+```javascript
+// 乘
+multiply(3, 2) // 6
+add(0,1, 0.2)  // 0.3
+// 四舍五入
+round(0.345, 2) // 0.35
+```
 
-- eslint
-- @typescript-eslint/eslint-plugin
-- @typescript-eslint/parser
+#####Chained use
 
-`"lint": "eslint src --ext .js,.ts"`
+```javascript
+jsMath
+  .multiply(0.2, 10, 100)
+  .add(1, 2, 3, 5, 10, 1000)
+  .subtract(0.1, 0.3, 0.4)
+  .devide(2, 5, 5, 20)
+  .round(2)
+  .value() // 1.22
+```

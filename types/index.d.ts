@@ -22,8 +22,8 @@ export declare const multiply: (...rest: number[]) => number;
 export declare const devide: (...rest: number[]) => number;
 /**
  * 四舍五入
- * @param ratio 四舍五入精度
  * @param float 需要精确的小数
+ * @param ratio 四舍五入精度
  */
-export declare const round: (ratio: number, float: number) => number;
+export declare const round: (float: number, ratio: number) => number;
 export default jsMath;

@@ -35,10 +35,10 @@ export const devide = function(...rest: number[]): number {
 
 /**
  * 四舍五入
- * @param ratio 四舍五入精度
  * @param float 需要精确的小数
+ * @param ratio 四舍五入精度
  */
-export const round = function(ratio: number, float: number): number {
+export const round = function(float: number, ratio: number): number {
   return jsMath
     .init(float)
     .round(ratio)

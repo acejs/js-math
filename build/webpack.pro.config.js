@@ -5,7 +5,8 @@ module.exports = {
   devtool: 'none',
   output: {
     libraryTarget: 'umd',
-    library: 'jsMath'
+    library: 'jsMath',
+    globalObject: 'this'
   },
   plugins: [new CleanWebpackPlugin()]
 }

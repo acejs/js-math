@@ -41,8 +41,12 @@ test('jsMath chain subtract', () => {
 })
 
 // single round
-test('single round', () => {
-  expect(round(2, 1.231412424)).toBe(1.23)
+test('single round1', () => {
+  expect(round(1.231412424, 2)).toBe(1.23)
+})
+
+test('single round2', () => {
+  expect(round(1.235412424, 2)).toBe(1.24)
 })
 
 // mixin
