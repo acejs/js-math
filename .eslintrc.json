@@ -9,7 +9,7 @@
     "prettier",
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint"
-  ], // 只用官方推荐配置
+  ],
   "rules": {
     "@typescript-eslint/interface-name-prefix": ["error", "always"]
   }

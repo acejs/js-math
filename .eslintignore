@@ -1,3 +1,4 @@
-rollup.config.js
+build
 dist
 types
+jest.config.js

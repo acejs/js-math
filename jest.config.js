@@ -9,7 +9,7 @@ module.exports = {
   // bail: 0,
 
   // Respect "browser" field in package.json when resolving modules
-  browser: true,
+  // browser: false,
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/private/var/folders/gs/h9__zpts3fv1049m4bnvgglw0000gn/T/jest_dx",
@@ -91,7 +91,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: null,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: null,
@@ -132,7 +132,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  // testEnvironment: "jest-environment-jsdom",
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
