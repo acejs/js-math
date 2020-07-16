@@ -8,7 +8,6 @@ yarn-error.log
 .prettierrc
 .browserslistrc
 publish.sh
-README.md
 
 build
 public
