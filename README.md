@@ -1,6 +1,6 @@
 ## js-math
 
-A lightweight Javascript math library.
+**A lightweight Javascript math library.**
 
 ### Installing
 
@@ -21,7 +21,7 @@ const { multiply, add, subtract, devide, round, default: jsMath } = require('@cd
 
 ### Documentation
 
-| Method       | desc                                                     | args                                                   |
+| Method       | Desc                                                     | Args                                                   |
 | ------------ | -------------------------------------------------------- | ------------------------------------------------------ |
 | multiply     | 乘                                                       | ...Array                                               |
 | add          | 加                                                       | ...Array                                               |
